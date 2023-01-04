@@ -61,26 +61,63 @@
     "absolute" "and" "array" "asm" "begin" "break" "case" "const"
     "constructor" "continue" "destructor" "div" "do" "downto" "else" "end"
     "file" "for" "function" "goto" "if" "implementation" "in" "inherited"
-    "inline" "interface" "label" "mod" "nil" "not" "object" "of"
+    "inline" "interface" "label" "mod" "not" "object" "of" ;; "nil"
     "on" "operator" "or" "packed" "procedure" "program" "record" "reintroduce"
-    "repeat" "self" "set" "shl" "shr" "string" "then" "to"
+    "repeat" "self" "set" "shl" "shr" "then" "to" ;; "string"
     "type" "unit" "until" "uses" "var" "while" "with" "xor"
 
     ;; Delphi
     "as" "class" "except" "exports" "finalization" "finally" "initialization"
-    "is" "library" "on" "property" "raise" "threadvar" "try"
+    "is" "library" "property" "raise" "threadvar" "try" ;; "on"
 
     ;; Free Pascal
-    "dispose" "exit" "false" "new" "true" "break" "continue"))
+    ;; "false" "true" "break" "continue"
+    "dispose" "exit" "new"))
+
+
+(defconst fpc-data-types
+  '(;; Integer types
+    "byte" "shortint"
+    "smallint" "word"
+    "integer" "cardinal"
+    "longint" "longword"
+    "int64" "qword"
+
+    ;; Real types
+    "real" "single"
+    "double" "extended"
+    "comp" "currency"
+
+    ;; Boolean types
+    "boolean" "bytebool"
+    "wordbool" "longbool"
+
+    ;; Character types
+    "char" "widechar"
+    "ansichar"
+
+    ;; String types
+    "string" "shortstring"
+    "ansistring" "widestring"
+    "unicodestring" "pchar"
+
+    ;; Others
+    "pointer"))
+
+
+(defconst fpc-constants
+  '("false" "true" "nil"))
 
 
 (defconst fpc-font-lock-keywords
   (list
+   `(,(regexp-opt fpc-constants 'words) . font-lock-constant-face)
    `(,(regexp-opt fpc-keywords 'symbols) . font-lock-keyword-face)
+   `(,(regexp-opt fpc-data-types 'words) . font-lock-type-face)
    `("\\_<\\(program\\)[[:space:]]*\\([_a-zA-Z][_a-zA-Z0-9]*\\)" (2 font-lock-constant-face))
    `("\\_<\\([_a-zA-Z][_a-zA-Z0-9]*\\)[[:space:]]*=" (1 font-lock-type-face))
    `("\\_<\\(function\\|procedure\\)[[:space:]]*\\([_a-zA-Z][_a-zA-Z0-9]*\\)" (2 font-lock-function-name-face))
-   `("\\_<\\([_a-zA-Z][_a-zA-Z0-9]*\\)[[:space:]]*:" (1 font-lock-variable-name-face))
+   `("\\_<\\([_a-zA-Z][_a-zA-Z0-9]*\\)[[:space:]]*:[[:space:]]*\\([_a-zA-Z][_a-zA-Z0-9]*\\)" (1 font-lock-variable-name-face) (2 font-lock-type-face))
    `("\\_<\\([_a-zA-Z][_a-zA-Z0-9]*\\)[[:space:]]*:=" (1 font-lock-variable-name-face))))
 
 ;;;###autoload
