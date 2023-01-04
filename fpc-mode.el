@@ -77,8 +77,11 @@
 (defconst fpc-font-lock-keywords
   (list
    `(,(regexp-opt fpc-keywords 'symbols) . font-lock-keyword-face)
-   `("\\_<\\(function\\|pro\\(cedure\\|gram\\)\\)[ \t]+\\([[:alpha:]][[:alnum:]_]*\\)"
-     (3 font-lock-function-name-face))))
+   `("\\_<\\(program\\)[[:space:]]*\\([_a-zA-Z][_a-zA-Z0-9]*\\)" (2 font-lock-constant-face))
+   `("\\_<\\([_a-zA-Z][_a-zA-Z0-9]*\\)[[:space:]]*=" (1 font-lock-type-face))
+   `("\\_<\\(function\\|procedure\\)[[:space:]]*\\([_a-zA-Z][_a-zA-Z0-9]*\\)" (2 font-lock-function-name-face))
+   `("\\_<\\([_a-zA-Z][_a-zA-Z0-9]*\\)[[:space:]]*:" (1 font-lock-variable-name-face))
+   `("\\_<\\([_a-zA-Z][_a-zA-Z0-9]*\\)[[:space:]]*:=" (1 font-lock-variable-name-face))))
 
 ;;;###autoload
 (define-derived-mode fpc-mode pascal-mode "Free Pascal"
