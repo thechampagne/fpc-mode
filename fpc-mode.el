@@ -70,9 +70,37 @@
     "as" "class" "except" "exports" "finalization" "finally" "initialization"
     "is" "library" "property" "raise" "threadvar" "try" ;; "on"
 
+    ;; Object Pascal
+    "constref" "out"
+
     ;; Free Pascal
     ;; "false" "true" "break" "continue"
     "dispose" "exit" "new"))
+
+
+(defconst fpc-modifiers
+  '("absolute" "abstract" "alias"
+    "assembler" "cdecl" "cppdecl"
+    "default" "export" "external"
+    "forward" "generic" "index"
+    "local" "name" "nostackframe"
+    "oldfpccall" "override" "pascal"
+    "private" "protected" "public"
+    "published" "register" "reintroduce"
+    "safecall" "softfloat" "specialize"
+    "stdcall" "virtual"))
+
+(defconst fpc-builtins
+  '("abs" "arctan" "cos"
+    "eof" "eoln" "exp"
+    "input" "ln" "maxint"
+    "odd" ;; "dispose" "new"
+    "ord" "output" "pack"
+    "page" "pred" "read"
+    "readln" "reset" "rewrite"
+    "round" "sin" "sqr" "sqrt"
+    "succ" "trunc" "write"
+    "writeln"))
 
 
 (defconst fpc-data-types
@@ -102,7 +130,7 @@
     "unicodestring" "pchar"
 
     ;; Others
-    "pointer"))
+    "pointer" "text"))
 
 
 (defconst fpc-constants
@@ -113,6 +141,8 @@
   (list
    `(,(regexp-opt fpc-constants 'words) . font-lock-constant-face)
    `(,(regexp-opt fpc-keywords 'symbols) . font-lock-keyword-face)
+   `(,(regexp-opt fpc-modifiers 'symbols) . font-lock-keyword-face)
+   `(,(regexp-opt fpc-builtins 'words) . font-lock-builtin-face)
    `(,(regexp-opt fpc-data-types 'words) . font-lock-type-face)
    `("\\_<\\(program\\)[[:space:]]*\\([_a-zA-Z][_a-zA-Z0-9]*\\)" (2 font-lock-constant-face))
    `("\\_<\\([_a-zA-Z][_a-zA-Z0-9]*\\)[[:space:]]*=" (1 font-lock-type-face))
